@@ -1,0 +1,65 @@
+class Question:
+    def __init__(self, question, options, correct_answer):
+        self.question = question
+        self.options = options
+        self.correct_answer = correct_answer
+
+    def display_question(self):
+        print(self.question)
+        for i, option in enumerate(self.options, start=1):
+            print(f"{i}. {option}")
+
+    def check_answer(self, player_answer):
+        return player_answer == self.correct_answer
+
+
+def run_trivia_game():
+    questions = [
+        Question("The capital of France is:", ["Paris", "Berlin", "London", "Madrid"], 1),
+        Question("How many legs do sheep have?", ["One", "Four", "Six", "Seven"], 2),
+        Question("Tomatoes are considered...", ["Fruits", "Vegetables", "Candies", "Citrus fruits"], 2),
+        Question("The capital of Libya is:", ["Tripoli", "Paris", "Cairo", "Tunis"], 1),
+        Question("Plants are an essential factor for:", ["Oxygen", "Nitrogen", "Carbon dioxide", "Phosphorus"], 1),
+    ]
+
+    player1_name = input("Enter Player 1's name: ")
+    player2_name = input("Enter Player 2's name: ")
+
+    player1_score = 0
+    player2_score = 0
+
+    for i in range(5):
+        print(f"\nQuestion {i + 1}:\n")
+        questions[i].display_question()
+
+        # Player 1's turn
+        player1_answer = int(input(f"{player1_name}, enter the number of your answer (1-4): "))
+        if questions[i].check_answer(player1_answer):
+            print(f"Correct, {player1_name}! You earn a point.")
+            player1_score += 1
+        else:
+            print(f"Incorrect, {player1_name}. The correct answer was {questions[i].correct_answer}.")
+
+        # Player 2's turn
+        player2_answer = int(input(f"{player2_name}, enter the number of your answer (1-4): "))
+        if questions[i].check_answer(player2_answer):
+            print(f"Correct, {player2_name}! You earn a point.")
+            player2_score += 1
+        else:
+            print(f"Incorrect, {player2_name}. The correct answer was {questions[i].correct_answer}.")
+
+    # Display the results
+    print("\nGame Over!\n")
+    print(f"{player1_name}'s Score: {player1_score}")
+    print(f"{player2_name}'s Score: {player2_score}")
+
+    if player1_score > player2_score:
+        print(f"{player1_name} wins!")
+    elif player2_score > player1_score:
+        print(f"{player2_name} wins!")
+    else:
+        print("It's a tie!")
+
+if __name__ == "__main__":
+    run_trivia_game()
+ 
